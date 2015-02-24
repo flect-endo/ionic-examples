@@ -19,3 +19,9 @@ ionic platform ios
 ```
 ionic build ios
 ```
+
+### 実行
+
+```
+ionic emulate ios
+```
