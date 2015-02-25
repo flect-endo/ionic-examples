@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
     { title: 'Find the princess' }
   ];
 
-  $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
+  $ionicModal.fromTemplateUrl('templates/new-task.html', function(modal) {
     $scope.taskModal = modal;
   }, {
     scope: $scope,

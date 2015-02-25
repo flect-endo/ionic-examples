@@ -30,6 +30,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
+  .state('app.todo', {
+    url: "/todo",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/todo.html"
+      }
+    }
+  })
+
   .state('app.search', {
     url: "/search",
     views: {
