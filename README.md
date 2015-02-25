@@ -14,14 +14,15 @@
 ionic platform ios
 ```
 
-## ビルド
+## 実行(ブラウザ)
+
+```
+ionic serve
+```
+
+## ビルド & 実行(iOS)
 
 ```
 ionic build ios
-```
-
-### 実行
-
-```
 ionic emulate ios
 ```
