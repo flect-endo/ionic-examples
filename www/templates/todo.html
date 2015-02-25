@@ -1,9 +1,12 @@
 <ion-view view-title="ToDo">
-  <ion-content>
+  <ion-nav-buttons side="right">
     <!-- New Task button -->
     <button class="button button-icon" ng-click="newTask()">
       <i class="icon ion-compose"></i>
     </button>
+  </ion-nav-buttons>
+
+  <ion-content>
     <ion-item ng-repeat="task in tasks">
       {{task.title}}
     </ion-item>
