@@ -1,5 +1,14 @@
 angular.module('starter.controllers', [])
 
+.controller('TodoCtrl', function($scope) {
+  $scope.tasks = [
+    { title: 'Collect coints' },
+    { title: 'Eat mushrooms' },
+    { title: 'Get high enough to grab the flag' },
+    { title: 'Find the princess' }
+  ]
+})
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
   $scope.loginData = {};
