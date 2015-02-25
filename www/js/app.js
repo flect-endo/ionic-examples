@@ -39,11 +39,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.search', {
-    url: "/search",
+  .state('app.map', {
+    url: "/map",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/map.html",
+        controller: 'MapCtrl'
       }
     }
   })
@@ -56,6 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+
   .state('app.playlists', {
     url: "/playlists",
     views: {
