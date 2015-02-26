@@ -103,15 +103,23 @@ angular.module('starter.controllers', [])
   function move(distance, direction) {
     var radius = { "north": 0, "west": -90, "south": -180, "east": 90 }[direction];
     var oldLatlng = $scope.latlng;
-    $scope.latlng = google.maps.geometry.spherical.computeOffset(oldLatlng, distance, radius);
-    var flightPath = new google.maps.Polyline({
-      path: [oldLatlng, $scope.latlng],
-      strokeColor: "#FF0000",
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-    });
-    flightPath.setMap($scope.map);
-    $scope.map.setCenter($scope.latlng);
+    var newLatlng = google.maps.geometry.spherical.computeOffset(oldLatlng, distance, radius);
+
+    if ($scope.polyline) {
+      var path = $scope.polyline.getPath();
+      path.push(newLatlng);
+    } else {
+      $scope.polyline = new google.maps.Polyline({
+        path: [oldLatlng, newLatlng],
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.5,
+        strokeWeight: 10
+      });
+      $scope.polyline.setMap($scope.map);
+    }
+
+    $scope.map.setCenter(newLatlng);
+    $scope.latlng = newLatlng;
   }
 
   $scope.moveUp = function() {
