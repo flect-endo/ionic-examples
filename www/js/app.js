@@ -88,6 +88,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
         controller: 'DialogsCtrl'
       }
     }
+  })
+
+  .state('app.inappbrowser', {
+    url: "/inappbrowser",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/inappbrowser.html",
+        controller: 'InAppBrowserCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists');
