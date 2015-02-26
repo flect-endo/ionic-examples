@@ -5,6 +5,8 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var tap = require('gulp-tap');
+var ngAnnotate = require('gulp-ng-annotate');
 var sh = require('shelljs');
 
 var paths = {
@@ -23,6 +25,21 @@ gulp.task('sass', function(done) {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
+});
+
+gulp.task('js', function() {
+  return gulp.src('./www/js/**/*.js')
+    .pipe(ngAnnotate())
+    .pipe(tap(function(file) {
+      file.contents = Buffer.concat([
+        new Buffer("(function(){\n"),
+        new Buffer("'use strict';\n"),
+        file.contents,
+        new Buffer("\n})();")
+      ]);
+    }))
+    .pipe(concat('build.js'))
+    .pipe(gulp.dest('www/js/'));
 });
 
 gulp.task('watch', function() {
