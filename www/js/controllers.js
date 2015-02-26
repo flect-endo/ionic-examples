@@ -70,6 +70,8 @@ angular.module('starter.controllers', [])
     loadCurrentPosition(function(latlng, err) {
       if (err) { return; }
 
+      $scope.latlng = latlng;
+
       var mapOptions = {
         center: latlng,
         zoom: 16,
@@ -97,6 +99,36 @@ angular.module('starter.controllers', [])
   };
 
   google.maps.event.addDomListener(window, 'load', initialize());
+
+  function move(distance, direction) {
+    var radius = { "north": 0, "west": -90, "south": -180, "east": 90 }[direction];
+    var oldLatlng = $scope.latlng;
+    $scope.latlng = google.maps.geometry.spherical.computeOffset(oldLatlng, distance, radius);
+    var flightPath = new google.maps.Polyline({
+      path: [oldLatlng, $scope.latlng],
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+    flightPath.setMap($scope.map);
+    $scope.map.setCenter($scope.latlng);
+  }
+
+  $scope.moveUp = function() {
+    move(150, "north");
+  };
+
+  $scope.moveRight = function() {
+    move(150, "east");
+  };
+
+  $scope.moveDown = function() {
+    move(150, "south");
+  };
+
+  $scope.moveLeft = function() {
+    move(150, "west");
+  };
 
   function loadCurrentPosition(callback) {
     if (navigator.geolocation) {

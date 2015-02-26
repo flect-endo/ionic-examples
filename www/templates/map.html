@@ -2,7 +2,11 @@
   <ion-content>
     <div id="map" data-tap-disabled="true"></div>
   </ion-content>
-  <ion-footer-bar class="bar-assertive">
+  <ion-footer-bar class="bar-positive">
+    <a ng-click="moveUp()" class="button button-icon icon ion-arrow-up-a"></a>
+    <a ng-click="moveRight()" class="button button-icon icon ion-arrow-right-a"></a>
+    <a ng-click="moveDown()" class="button button-icon icon ion-arrow-down-a"></a>
+    <a ng-click="moveLeft()" class="button button-icon icon ion-arrow-left-a"></a>
     <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>
   </ion-footer-bar>
 </ion-view>
