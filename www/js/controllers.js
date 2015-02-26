@@ -138,6 +138,13 @@ angular.module('starter.controllers', [])
     move(150, "west");
   };
 
+  $scope.moveRandom = function() {
+    move(
+      Math.floor((Math.random() * 100) + 1),
+      ["north", "east", "south", "west"][Math.floor(Math.random() * 4)]
+    );
+  };
+
   function loadCurrentPosition(callback) {
     if (navigator.geolocation) {
     } else {
