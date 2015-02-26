@@ -7,8 +7,21 @@
 
 ## 準備
 
-- Clone
-- ionicプラットフォームを追加
+- リポジトリをClone
+- ionicプラグインインストール
+- npmモジュールインストール
+
+```
+npm install
+```
+
+- bowerモジュールインストール
+
+```
+gulp install
+```
+
+- ionicプラットフォーム(iOS)を追加
 
 ```
 ionic platform ios
@@ -17,7 +30,6 @@ ionic platform ios
 - Sassビルド(オプション)
 
 ```
-npm install
 gulp sass
 ```
 
