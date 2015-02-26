@@ -87,7 +87,13 @@ angular.module('starter.controllers', [])
       var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        title: 'Uluru (Ayers Rock)'
+        title: 'Uluru (Ayers Rock)',
+        icon: new google.maps.MarkerImage(
+          "./img/house.png",
+          new google.maps.Size(32, 32), // size
+          new google.maps.Point(0, 0), // origin
+          new google.maps.Point(16, 16) // anchor
+        )
       });
 
       google.maps.event.addListener(marker, 'click', function() {
