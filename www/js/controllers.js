@@ -65,7 +65,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('MapCtrl', function($scope, $ionicLoading, $compile) {
+.controller('MapCtrl', function($scope, $ionicLoading, $compile, MapService) {
   function initialize() {
     loadCurrentPosition(function(latlng, err) {
       if (err) { return; }
@@ -115,25 +115,9 @@ angular.module('starter.controllers', [])
   google.maps.event.addDomListener(window, 'load', initialize());
 
   function move(distance, direction) {
-    var radius = { "north": 0, "west": -90, "south": -180, "east": 90 }[direction];
-    var oldLatlng = $scope.latlng;
-    var newLatlng = google.maps.geometry.spherical.computeOffset(oldLatlng, distance, radius);
-
-    if ($scope.polyline) {
-      var path = $scope.polyline.getPath();
-      path.push(newLatlng);
-    } else {
-      $scope.polyline = new google.maps.Polyline({
-        path: [oldLatlng, newLatlng],
-        strokeColor: "#0000FF",
-        strokeOpacity: 0.5,
-        strokeWeight: 10
-      });
-      $scope.polyline.setMap($scope.map);
-    }
-
-    $scope.map.setCenter(newLatlng);
-    $scope.latlng = newLatlng;
+    var results = MapService.move($scope.map, $scope.latlng, $scope.polyline, distance, direction);
+    $scope.polyline = results.polyline;
+    $scope.latlng = results.latlng;
   }
 
   $scope.moveUp = function() {
@@ -160,55 +144,11 @@ angular.module('starter.controllers', [])
   };
 
   $scope.search = function() {
-    var request = {
-      address: $scope.searchKey
-    };
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode(request, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        var marker = new google.maps.Marker({
-          position: results[0].geometry.location,
-          title: request.address,
-          map: $scope.map
-        });
-
-        // search route from home
-        // TODO: move to service.
-        var routeRequest = {
-          origin: $scope.home,
-          destination: results[0].geometry.location,
-          travelMode: google.maps.DirectionsTravelMode.WALKING, // google.maps.DirectionsTravelMode.DRIVING,
-          unitSystem: google.maps.DirectionsUnitSystem.METRIC,
-          optimizeWaypoints: true,
-          avoidHighways: false,
-          avoidTolls: false
-        };
-        var directionsService = new google.maps.DirectionsService();
-        directionsService.route(routeRequest, function(response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-            $scope.directionsDisplay.setDirections(response);
-          }
-        });
-      } else {
-        alert('not found: ' + $scope.searchKey);
-      }
-    });
+    MapService.searchRoute($scope.directionsDisplay, $scope.map, $scope.home, $scope.searchKey);
   };
 
   $scope.searchPlaces = function() {
-    var service = new google.maps.places.PlacesService($scope.map);
-    var request = {
-      location: $scope.home,
-      radius: '1000',
-      types: ['train_station', 'subway_station']
-    }
-    service.search(request, function(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          console.log(results[i]);
-        }
-      }
-    });
+    MapService.searchPlaces($scope.map, $scope.home);
   };
 
   function loadCurrentPosition(callback) {
@@ -238,10 +178,6 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', function($scope, PlaylistService) {
   $scope.playlists = PlaylistService.all();
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams, PlaylistService) {
-  $scope.playlist = PlaylistService.get($stateParams.playlistId);
 })
 
 .controller('DialogsCtrl', function($scope) {
