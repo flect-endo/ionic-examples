@@ -70,7 +70,7 @@ angular.module('starter.controllers', [])
     loadCurrentPosition(function(latlng, err) {
       if (err) { return; }
 
-      $scope.latlng = latlng;
+      $scope.home = $scope.latlng = latlng;
 
       var mapOptions = {
         center: latlng,
@@ -92,7 +92,7 @@ angular.module('starter.controllers', [])
           "./img/house.png",
           new google.maps.Size(32, 32), // size
           new google.maps.Point(0, 0), // origin
-          new google.maps.Point(16, 16) // anchor
+          new google.maps.Point(0, 16) // anchor
         )
       });
 
@@ -100,9 +100,17 @@ angular.module('starter.controllers', [])
         infowindow.open(map, marker);
       });
 
+      $scope.directionsDisplay.setMap(map);
+      google.maps.event.addListener($scope.directionsDisplay, 'directions_changed', function(){});
+
       $scope.map = map;
     });
   };
+
+  $scope.directionsDisplay = new google.maps.DirectionsRenderer({
+    draggable: true,
+    preserveViewpoint: false
+  });
 
   google.maps.event.addDomListener(window, 'load', initialize());
 
@@ -150,6 +158,42 @@ angular.module('starter.controllers', [])
       ["north", "east", "south", "west"][Math.floor(Math.random() * 4)]
     );
   };
+
+  $scope.search = function() {
+    var request = {
+      address: $scope.searchKey
+    };
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode(request, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          title: request.address,
+          map: $scope.map
+        });
+
+        // search route from home
+        // TODO: move to service.
+        var routeRequest = {
+          origin: $scope.home,
+          destination: results[0].geometry.location,
+          travelMode: google.maps.DirectionsTravelMode.WALKING, // google.maps.DirectionsTravelMode.DRIVING,
+          unitSystem: google.maps.DirectionsUnitSystem.METRIC,
+          optimizeWaypoints: true,
+          avoidHighways: false,
+          avoidTolls: false
+        };
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(routeRequest, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            $scope.directionsDisplay.setDirections(response);
+          }
+        });
+      } else {
+        alert('not found: ' + $scope.searchKey);
+      }
+    });
+  }
 
   function loadCurrentPosition(callback) {
     if (navigator.geolocation) {
