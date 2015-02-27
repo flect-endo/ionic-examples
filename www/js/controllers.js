@@ -193,7 +193,23 @@ angular.module('starter.controllers', [])
         alert('not found: ' + $scope.searchKey);
       }
     });
-  }
+  };
+
+  $scope.searchPlaces = function() {
+    var service = new google.maps.places.PlacesService($scope.map);
+    var request = {
+      location: $scope.home,
+      radius: '1000',
+      types: ['train_station', 'subway_station']
+    }
+    service.search(request, function(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          console.log(results[i]);
+        }
+      }
+    });
+  };
 
   function loadCurrentPosition(callback) {
     if (navigator.geolocation) {
