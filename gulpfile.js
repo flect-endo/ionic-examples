@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var tap = require('gulp-tap');
 var ngAnnotate = require('gulp-ng-annotate');
+var inject = require('gulp-inject');
 var sh = require('shelljs');
 
 var paths = {
@@ -64,4 +65,11 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+gulp.task('index', function() {
+  var target = gulp.src('./www/index.html');
+  var sources = gulp.src(['./www/js/**/*.js'], { read: false });
+  return target.pipe(inject(sources, { relative: true }))
+    .pipe(gulp.dest('./www'));
 });
