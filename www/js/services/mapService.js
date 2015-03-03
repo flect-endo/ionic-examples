@@ -65,18 +65,33 @@ angular.module('starter.services')
         });
     };
 
-    var searchPlaces = function(map, location) {
+    var searchPlaces = function(directionsDisplay, map, location) {
         var service = new google.maps.places.PlacesService(map);
         var request = {
           location: location,
-          radius: '1000',
-          types: ['train_station', 'subway_station']
+          radius: '500' // ,
+          // types: ['train_station', 'subway_station']
         }
+        var waypoints = [];
         service.search(request, function(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-              console.log(results[i]);
+            var pointNum = Math.min(5, results.length);
+            for (var i = 0; i < pointNum; i++) {
+              waypoints.push({ location: results[i].geometry.location });
             }
+
+            var routeRequest = {
+              origin: location,
+              destination: location,
+              waypoints: waypoints,
+              travelMode: google.maps.DirectionsTravelMode.WALKING
+            };
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(routeRequest, function(response, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+              }
+            });
           }
         });
     };

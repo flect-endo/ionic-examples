@@ -82,7 +82,7 @@ angular.module('starter.controllers')
   };
 
   $scope.searchPlaces = function() {
-    MapService.searchPlaces($scope.map, $scope.home);
+    MapService.searchPlaces($scope.directionsDisplay, $scope.map, $scope.home);
   };
 
   function loadCurrentPosition(callback) {
