@@ -69,7 +69,7 @@ gulp.task('git-check', function(done) {
 
 gulp.task('index', function() {
   var target = gulp.src('./www/index.html');
-  var sources = gulp.src(['./www/js/**/*.js'], { read: false });
+  var sources = gulp.src(['./www/js/**/*.js', '!./www/js/build.js'], { read: false });
   return target.pipe(inject(sources, { relative: true }))
     .pipe(gulp.dest('./www'));
 });

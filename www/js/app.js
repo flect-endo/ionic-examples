@@ -98,6 +98,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
         controller: 'InAppBrowserCtrl'
       }
     }
+  })
+
+  .state('app.media', {
+    url: "/media",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/media.html",
+        controller: 'MediaCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists');
