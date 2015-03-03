@@ -69,15 +69,15 @@ angular.module('starter.services')
         var service = new google.maps.places.PlacesService(map);
         var request = {
           location: location,
-          radius: '500' // ,
-          // types: ['train_station', 'subway_station']
+          radius: '1000',
+          types: ['train_station', 'subway_station']
         }
         var waypoints = [];
         service.search(request, function(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
             var pointNum = Math.min(5, results.length);
             for (var i = 0; i < pointNum; i++) {
-              waypoints.push({ location: results[i].geometry.location });
+              waypoints.push({ location: results[i].geometry.location, stopover: true });
             }
 
             var routeRequest = {
