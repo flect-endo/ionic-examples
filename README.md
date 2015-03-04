@@ -8,7 +8,6 @@
 ## 準備
 
 - リポジトリをClone
-- ionicプラグインインストール
 - npmモジュールインストール
 
 ```
@@ -19,6 +18,12 @@ npm install
 
 ```
 gulp install
+```
+
+- ionicプラグインインストール
+
+```
+gulp ionic-plugin-install
 ```
 
 - ionicプラットフォーム(iOS)を追加
