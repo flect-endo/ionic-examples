@@ -28,6 +28,7 @@
     "com.megster.cordova.bluetoothserial",
     "org.apache.cordova.dialogs",
     "org.apache.cordova.inappbrowser",
-    "org.apache.cordova.media"
+    "org.apache.cordova.media",
+    "org.apache.cordova.media-capture"
   ]
 }
