@@ -5,19 +5,22 @@
       <p>
       Media!! {{recordingStatus}}
       </p>
-      <h4 ng-click="startRecord()">startRecord</h4>
-      <h4 ng-click="stopRecord()">stopRecord</h4>
+      <button ng-click="startRecord()" ng-if="stopped" class="button button-balanced">startRecord</button>
+      <button ng-click="stopRecord()" ng-if="!stopped()" class="button button-energized">stopRecord</button>
 
-      <ion-item ng-repeat="record in records">
-        <h3>{{record.src}}</h3>
-        <p>{{record.getDuration()}}</p>
-      </ion-item>
+      <div class="list">
+        <ion-item ng-repeat="record in records">
+          <h3>{{record.name}}</h3>
+          <p>{{record.size}}</p>
+          <p>{{record.lastModifiedDate}}</p>
+        </ion-item>
+      </div>
 
       <h3>Media Capture</h3>
-      <h4 ng-click="captureImage()">captureImage</h4>
-      <p>aaa</p>
-      <h4 ng-click="captureAudio()">captureAudio</h4>
-      <p>bbb</p>
+      <button ng-click="captureImage()" class="button button-positive">captureImage</button>
+      <!-- <p>aaa</p> -->
+      <button ng-click="captureAudio()" class="button button-royal">captureAudio</button>
+      <!-- <p>bbb</p> -->
     </div>
   </ion-content>
 </ion-view>
