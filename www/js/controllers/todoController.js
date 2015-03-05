@@ -7,11 +7,11 @@ angular.module('starter.controllers')
     { title: 'Find the princess' }
   ];
 
-  $ionicModal.fromTemplateUrl('templates/new-task.html', function(modal) {
-    $scope.taskModal = modal;
-  }, {
+  $ionicModal.fromTemplateUrl('templates/new-task.html', {
     scope: $scope,
     animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.taskModal = modal;
   });
 
   $scope.createTask = function(task) {
