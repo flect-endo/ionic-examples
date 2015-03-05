@@ -2,7 +2,10 @@ angular.module('starter.controllers')
 .controller('MapCtrl', function($scope, $ionicLoading, $compile, MapService) {
   function initialize() {
     loadCurrentPosition(function(latlng, err) {
-      if (err) { return; }
+      if (err) {
+        alert(err);
+        return;
+      }
 
       $scope.home = $scope.latlng = latlng;
 
@@ -41,12 +44,16 @@ angular.module('starter.controllers')
     });
   };
 
-  $scope.directionsDisplay = new google.maps.DirectionsRenderer({
-    draggable: true,
-    preserveViewpoint: false
-  });
-
-  google.maps.event.addDomListener(window, 'load', initialize());
+  // デバイスがインターネット未接続時は google.maps.xxx がロードされずに null になるのでチェックを入れる
+  if (google.maps.DirectionsRenderer) {
+    $scope.directionsDisplay = new google.maps.DirectionsRenderer({
+      draggable: true,
+      preserveViewpoint: false
+    });
+  }
+  if (google.maps.event) {
+    google.maps.event.addDomListener(window, 'load', initialize());
+  }
 
   function move(distance, direction) {
     var results = MapService.move($scope.map, $scope.latlng, $scope.polyline, distance, direction);
