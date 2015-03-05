@@ -1,20 +1,29 @@
 angular.module('starter.controllers')
 .controller('MediaCtrl', function($scope) {
-  $scope.hoge = "hogehoge";
+  $scope.counter = 0;
+  $scope.records = [];
+  $scope.recordingStatus = "None";
 
-  document.addEventListener("deviseready", onDeviseReady, false);
-
-  function onDeviseReady() {
-    alert("devise readied!");
-    var src = "hoge.mp3";
-    var media = new Media(src,
+  $scope.startRecord = function() {
+    var src = "record" + $scope.counter + ".wav";
+    $scope.media = new Media(src,
       function() {
-        alert("success");
+        alert("OK");
       },
       function(err) {
-        alert("error: " + err.code);
+        alert("ERROR")
+        alert(err);
       }
     );
-    media.startRecord();
-  }
+
+    $scope.media.startRecord();
+    $scope.recordingStatus = "record start...";
+  };
+
+  $scope.stopRecord = function() {
+    $scope.media.stopRecord();
+    $scope.recordingStatus = "record stopped";
+    $scope.counter += 1;
+    $scope.records.push($scope.media);
+  };
 });
