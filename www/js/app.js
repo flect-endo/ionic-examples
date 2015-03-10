@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
 
-.constant('HELLO_MSG', 'Hello!!!')
+.constant('APP_URL', 'http://localhost:3000/')
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

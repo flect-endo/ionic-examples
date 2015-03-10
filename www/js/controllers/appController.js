@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $http, Account, APP_URL) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -24,10 +24,26 @@ angular.module('starter.controllers')
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    $http({
+        method: 'POST',
+        withCredentials: true,
+        url: APP_URL + "users/sign_in.json",
+        data: { user: $scope.loginData },
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json; charset=utf-8' // ,
+            // 'Access-Control-Request-Headers': 'X-Requested-With, content-type, accept, origin, withcredentials'
+        }
+    })
+    .success(function(data, status, headers, config) {
+        console.log('success');
+        Account.email = data.email;
+        Account.token = data.authentication_token;
+        $scope.closeLogin();
+    })
+    .error(function(data, status, headers, config) {
+        console.log(data);
+        $scope.closeLogin();
+    });
   };
 });

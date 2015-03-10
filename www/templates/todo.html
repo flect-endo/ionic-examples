@@ -7,8 +7,12 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <ion-item ng-repeat="task in tasks">
-      {{task.title}}
-    </ion-item>
+    <ion-checkbox ng-repeat="task in tasks" ng-model="task.checked" ng-checked="task.checked">
+      {{ task.title }}
+    </ion-checkbox>
   </ion-content>
+
+  <ion-footer-bar class="bar-dark">
+    <a ng-click="submit()" class="button button-icon icon ion-checkmark"> 登録</a>
+  </ion-footer-bar>
 </ion-view>
