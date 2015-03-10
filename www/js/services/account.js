@@ -1,7 +1,7 @@
 angular.module('starter.services')
 .factory('Account', function() {
   return {
-    email: "",
-    token: ""
+    email: null,
+    token: null
   };
 });
