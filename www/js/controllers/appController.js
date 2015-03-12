@@ -27,6 +27,7 @@ angular.module('starter.controllers')
     Client.post("users/sign_in.json", { user: $scope.loginData },
       function(data, status, headers, config) {
         console.log('success');
+        Account.id = data.id;
         Account.email = data.email;
         Account.token = data.authentication_token;
         $scope.closeLogin();
