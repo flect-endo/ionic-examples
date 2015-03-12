@@ -7,13 +7,17 @@
       </p>
       <button ng-click="startRecord()" ng-if="stopped" class="button button-balanced">startRecord</button>
       <button ng-click="stopRecord()" ng-if="!stopped()" class="button button-energized">stopRecord</button>
+      <button ng-click="deleteAll()" class="button button-assertive">deleteAllFiles</button>
 
       <div class="list">
-        <ion-item ng-repeat="record in records">
+        <div class="item item-button-right" ng-repeat="record in records">
           <h3>{{record.name}}</h3>
           <p>{{record.size}}</p>
           <p>{{record.lastModifiedDate}}</p>
-        </ion-item>
+          <button class="button button-positive" ng-click="play(record.name)">
+            <i class="icon ion-ios7-play"></i>
+          </button>
+        </div>
       </div>
 
       <h3>Media Capture</h3>

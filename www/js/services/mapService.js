@@ -42,7 +42,7 @@ angular.module('starter.services')
 
             showRoute(directionsDisplay, origin, location);
           } else {
-            alert('not found: ' + $scope.searchKey);
+            alert('not found: ' + key + ", status = " + status);
           }
         });
     };

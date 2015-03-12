@@ -72,6 +72,38 @@ angular.module('starter.controllers')
     navigator.notification.alert('error: ' + err.code, null, 'Uh oh!');
   }
 
+  $scope.play = function(name) {
+    alert("playing..." + name);
+    var media = new Media(name,
+      function() { alert("play ok"); },
+      function(err) { alert("play error: " + err); }
+    );
+    media.play();
+  };
+
+  $scope.deleteAll = function() {
+    var removeFile = function(entries) {
+      for (var i=0; i<entries.length; i++) {
+        var entry = entries[i];
+        entry.remove(function(e) {
+          console.log("Removal succeeded.");
+        }, function(err) {
+          console.log("Error removing file: " + err.code);
+        });
+      }
+    }
+
+    var fsCallback = function(fs) {
+      var directoryEntry = fs.root;
+      var directoryReader = directoryEntry.createReader();
+      directoryReader.readEntries(removeFile, fail);
+    };
+
+    if (typeof LocalFileSystem !== "undefined") {
+      window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, fsCallback, fail);
+    }
+  };
+
   // media-capture プラグイン版
 
   $scope.captureImage = function() {
