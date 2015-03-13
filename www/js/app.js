@@ -6,7 +6,6 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
 
-// .constant('APP_URL', 'https://michelin-dev.herokuapp.com/')
 .constant('APP_URL', 'http://localhost:3000/')
 
 .run(function($ionicPlatform) {
@@ -67,7 +66,18 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
     url: "/attendance",
     views: {
       'menuContent': {
-        templateUrl: "templates/attendance.html"
+        templateUrl: "templates/attendance.html",
+        controller: 'AttendanceCtrl'
+      }
+    }
+  })
+
+  .state('app.today', {
+    url: "/attendance/today",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/today-attendance.html",
+        controller: 'AttendanceCtrl'
       }
     }
   })
