@@ -5,6 +5,7 @@ angular.module('starter.services')
   // 認証パラメータが必要なAPI(サインアップ、ログイン、ログアウト以外全て)は
   // 認証トークン用のクエリパラメータを付与して返す。
   function buildUrl(path) {
+    console.log("request) email: " + Account.email + ", token: " + Account.token);
     var url = APP_URL + path;
     if (Account.email && Account.token) {
       url = url + "?email=" + Account.email + "&token=" + Account.token;
