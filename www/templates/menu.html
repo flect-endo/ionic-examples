@@ -14,15 +14,21 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">メニュー</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item nav-clear menu-close href="#/app/home">
+          <i class="icon ion-home"></i> ホーム
+        </ion-item>
         <ion-item nav-clear menu-close href="#/app/todo">
-          ToDo
+          <i class="icon ion-clipboard"></i> チェックリスト
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/attendance">
+          <i class="icon ion-clock"></i> 日報
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/map">
-          Map
+          マップ
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/browse">
           Browse
@@ -37,7 +43,7 @@
           InAppBrowser
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/media">
-          Media
+          <i class="icon ion-music-note"></i> 録音
         </ion-item>
       </ion-list>
     </ion-content>

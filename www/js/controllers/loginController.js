@@ -1,6 +1,17 @@
 angular.module('starter.controllers')
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, Account) {
-  $scope.data = {};
+.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $ionicLoading, $state, Account) {
+  $scope.data = {
+    email: "takumi.endo@flect.co.jp",
+    password: "password"
+  };
+
+  // $ionicLoading.show({
+  //   template: "Loading..."
+  // });
+
+  // document.addEventListener("deviceready", function() {
+  //   $ionicLoading.hide();
+  // }, false);
 
   $scope.login = function() {
     console.log("LOGIN");
@@ -10,7 +21,7 @@ angular.module('starter.controllers')
       Account.id = data.id;
       Account.email = data.email;
       Account.token = data.authentication_token;
-      $state.go('app.todo');
+      $state.go('app.home');
     })
     .error(function(data) {
       var alertPopup = $ionicPopup.alert({
