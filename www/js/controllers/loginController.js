@@ -1,8 +1,9 @@
 angular.module('starter.controllers')
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $ionicLoading, $state, Account) {
   $scope.data = {
-    email: "takumi.endo@flect.co.jp",
-    password: "password"
+    // 開発時に毎回入力が面倒なので、値をセットしておく
+    email: "",
+    password: ""
   };
 
   // $ionicLoading.show({
