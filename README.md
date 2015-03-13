@@ -41,10 +41,10 @@ gulp sass
 ## 実行(ブラウザ)
 
 ```
-ionic serve
+ionic serve --lab
 ```
 
-## ビルド & 実行(iOS)
+## ビルド & 実行(iOSシミュレータ)
 
 ```
 ionic build ios
