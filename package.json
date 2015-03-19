@@ -29,6 +29,7 @@
     "org.apache.cordova.dialogs",
     "org.apache.cordova.inappbrowser",
     "org.apache.cordova.media",
-    "org.apache.cordova.media-capture"
+    "org.apache.cordova.media-capture",
+    "org.apache.cordova.file-transfer"
   ]
 }
