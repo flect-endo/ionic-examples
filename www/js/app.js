@@ -7,6 +7,8 @@
 angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
 
 .constant('APP_URL', 'http://localhost:3000/')
+.constant('DEFAULT_EMAIL', '')
+.constant('DEFAULT_PASSWORD', '')
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -121,12 +123,12 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
     }
   })
 
-  .state('app.dialogs', {
-    url: "/dialogs",
+  .state('app.image', {
+    url: "/image",
     views: {
       'menuContent': {
-        templateUrl: "templates/dialogs.html",
-        controller: 'DialogsCtrl'
+        templateUrl: "templates/image.html",
+        controller: 'ImageCtrl'
       }
     }
   })
