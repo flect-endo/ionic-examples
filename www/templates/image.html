@@ -9,6 +9,7 @@
         <p>フルパス: {{image.fullPath}}</p>
         <p>最終更新時刻: {{image.lastModifiedDate}}</p>
         <p>サイズ: {{image.size}}</p>
+        <button class="button button-calm" ng-click="uploadPicture(image.localURL)">Upload</button>
         <!-- <i class="icon ion-chevron-right icon-accessory"></i> -->
       </ion-item>
     </ion-list>
