@@ -43,11 +43,41 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
     templateUrl: "templates/menu.html"
   })
 
+  .state('app.home', {
+    url: "/home",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/home.html"
+      }
+    }
+  })
+
   .state('app.todo', {
     url: "/todo",
     views: {
       'menuContent': {
-        templateUrl: "templates/todo.html"
+        templateUrl: "templates/todo.html",
+        controller: 'TodoCtrl'
+      }
+    }
+  })
+
+  .state('app.attendance', {
+    url: "/attendance",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/attendance.html",
+        controller: 'AttendanceCtrl'
+      }
+    }
+  })
+
+  .state('app.today', {
+    url: "/attendance/today",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/today-attendance.html",
+        controller: 'AttendanceCtrl'
       }
     }
   })

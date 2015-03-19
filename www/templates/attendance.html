@@ -1,0 +1,14 @@
+<ion-view view-title="日報">
+  <ion-content class="padding">
+    <button class="button button-block button-stable" ng-click="getToday()">
+      今日の日報
+    </button>
+    <ion-list>
+      <ion-item ng-repeat="attendance in attendances">
+        <h3>{{ attendance.date }}</h3>
+        <p>開始時刻: {{ attendance.started_at }}</p>
+        <p>終了時刻: {{ attendance.ended_at }}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
