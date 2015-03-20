@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ImageCtrl', function($scope, ErrorHandler, APP_URL) {
+.controller('ImageCtrl', function($scope, $ionicLoading, ErrorHandler, APP_URL) {
 
   $scope.imageFiles = [];
 
@@ -61,12 +61,14 @@ angular.module('starter.controllers')
     console.log("uploading file " + fileURI);
 
     var win = function(r) {
+      $ionicLoading.hide();
       console.log("upload success");
       console.log("Code = " + r.responseCode);
       console.log("Response = " + r.response);
       console.log("Sent = " + r.bytesSent);
     };
     var fail = function (error) {
+      $ionicLoading.hide();
       alert("An error has occurred: Code = " + error.code);
       console.log("upload error source " + error.source);
       console.log("upload error target " + error.target);
@@ -82,6 +84,10 @@ angular.module('starter.controllers')
 
     var destination = encodeURI(APP_URL + "pictures.json");
     console.log("destination = " + destination);
+
+    $ionicLoading.show({
+      template: "アップロード中..."
+    });
 
     var ft = new FileTransfer();
     ft.upload(fileURI, destination, win, fail, options);

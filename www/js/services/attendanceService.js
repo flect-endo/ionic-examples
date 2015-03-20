@@ -6,10 +6,10 @@ angular.module('starter.services')
       return AsyncClient.get("users/" + Account.id + "/attendances.json");
     },
     start: function() {
-      return AsyncClient.post("users/" + Account.id + "/attendances/start.json", {});
+      return AsyncClient.post("users/" + Account.id + "/attendances/clock_in.json", {});
     },
     end: function() {
-      return AsyncClient.post("users/" + Account.id + "/attendances/end.json", {});
+      return AsyncClient.post("users/" + Account.id + "/attendances/clock_out.json", {});
     }
   }
 });
